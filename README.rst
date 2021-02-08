@@ -1,77 +1,49 @@
-Flaskr
+Feature Flag
 ======
 
-The basic blog app built in the Flask `tutorial`_.
+This project was created from a Flask/Python template app and altered by Angela Lui.
 
-.. _tutorial: https://flask.palletsprojects.com/tutorial/
+Objective
+-------
 
+Evaluating whether a user is more likely to engage with the app when site is more colorful.
+
+*Feature flag*: Targeted users will see pink header variant vs the default blue. 
+
+
+About the app
+----
+
+This is a basic blogging app called Flaskr that allows users to create users, log in, and create/edit/delete posts. 
+
+The Code
+ * ld.py - Imports LaunchDarkly client and initializes an instance using my SDK key. Also makes sure the instance is closed at the end of the session.
+ * blog.py - Index function shows all posts from the database. Within the function it checks to see if the user has been authenticated (logged in), and if this is true, to set user's ID as the LD user key. If the user has a key, then the ldclient will look up the user's variation for the pink_headers feature flag. The variation variable is sent to blog/index.html template. 
+ * /static/style.css - created new class 'pink' for pink font
+ * /templates/blog/index.html - h1 header checks the flag, if pink_headers is true, show class pink, otherwise, it's the default template. 
+ 
 
 Install
 -------
-
-**Be sure to use the same version of the code as the version of the docs
-you're reading.** You probably want the latest tagged version, but the
-default Git version is the master branch. ::
-
-    # clone the repository
-    $ git clone https://github.com/pallets/flask
-    $ cd flask
-    # checkout the correct version
-    $ git tag  # shows the tagged versions
-    $ git checkout latest-tag-found-above
-    $ cd examples/tutorial
-
 Create a virtualenv and activate it::
 
     $ python3 -m venv venv
     $ . venv/bin/activate
 
-Or on Windows cmd::
+Install Flask::
 
-    $ py -3 -m venv venv
-    $ venv\Scripts\activate.bat
+    $ pip install flask
 
-Install Flaskr::
+Install LaunchDarkly's SDK::
 
-    $ pip install -e .
-
-Or if you are using the master branch, install Flask from source before
-installing Flaskr::
-
-    $ pip install -e ../..
-    $ pip install -e .
-
+    $ pip install launchdarkly-server-sdk
 
 Run
 ---
-
 ::
 
-    $ export FLASK_APP=flaskr
-    $ export FLASK_ENV=development
-    $ flask init-db
     $ flask run
-
-Or on Windows cmd::
-
-    > set FLASK_APP=flaskr
-    > set FLASK_ENV=development
-    > flask init-db
-    > flask run
 
 Open http://127.0.0.1:5000 in a browser.
 
-
-Test
-----
-
-::
-
-    $ pip install '.[test]'
-    $ pytest
-
-Run with coverage report::
-
-    $ coverage run -m pytest
-    $ coverage report
-    $ coverage html  # open htmlcov/index.html in a browser
+  
