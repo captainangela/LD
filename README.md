@@ -10,6 +10,9 @@ Evaluating whether a user is more likely to engage with the app when site is mor
 
 *Feature flag*: Targeted users will see pink header variant vs the default blue. 
 
+<img src="https://i.imgur.com/p21t0Y5.png"
+     alt="Pink Feature Flag Shown"
+     width="200"/>
 
 About the app
 ----
